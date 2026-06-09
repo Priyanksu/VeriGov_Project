@@ -1,0 +1,11 @@
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import "tailwindcss";
+/* <-- ADDED SEMICOLON HERE */
+
+/* inline linter bypass if your editor supports it, or use valid v4 theme mapping */
+@theme {
+  --color-darkBg: #121212;
+  --color-surfaceCard: #1E1E1E;
+  --color-techGreen: #00E676;
+  --color-techGreenHover: #00B451;
+}

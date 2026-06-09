@@ -1,0 +1,21 @@
+# Environments
+venv/
+.env
+
+# Build & Dependency Artifacts
+verigov-dashboard/node_modules/
+verigov-dashboard/dist/
+VeriGovCitizen/build/
+.gradle/
+.idea/
+.vscode/
+
+# Python & System Cache
+__pycache__/
+*.pyc
+.DS_Store
+
+# Large Data & Models (Do not push to GitHub)
+Data/
+VeriGov_backend/Data/
+VeriGov_backend/models/

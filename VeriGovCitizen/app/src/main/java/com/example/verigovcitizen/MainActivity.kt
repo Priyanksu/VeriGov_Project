@@ -474,7 +474,24 @@ interface VeriGovApiService {
 
 object RetrofitClient {
     // Emulator: http://10.0.2.2:5000/ | Physical Phone: http://<your-computer-ip>:5000/
-    private const val BASE_URL = "http://192.168.1.12:5000/"
+//    private const val BASE_URL = "http://192.168.1.12:5000/"
+//    val instance: VeriGovApiService by lazy {
+//        val retrofit = retrofit2.Retrofit.Builder()
+//            .baseUrl(BASE_URL)
+//            .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create())
+//            .build()
+//        retrofit.create(VeriGovApiService::class.java)
+//    }
+
+    // ⚓ The master switch: true for live Render, false for local emulator
+    private const val IS_PRODUCTION = true
+
+    // ✅ FIXED: Removed 'const'. Now Kotlin allows the conditional check perfectly!
+    private val BASE_URL = if (IS_PRODUCTION) {
+        "https://verigov-project.onrender.com/" // 👈 Your active Render URL
+    } else {
+        "http://192.168.1.12:5000/"
+    }
     val instance: VeriGovApiService by lazy {
         val retrofit = retrofit2.Retrofit.Builder()
             .baseUrl(BASE_URL)

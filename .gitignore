@@ -18,4 +18,3 @@ __pycache__/
 # Large Data & Models (Do not push to GitHub)
 Data/
 VeriGov_backend/Data/
-VeriGov_backend/models/

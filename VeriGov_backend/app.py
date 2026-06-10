@@ -25,7 +25,8 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 
 # 1. Configuration Core
 app.config['SECRET_KEY'] = 'verigov_secure_cryptographic_jwt_key_2026'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:abcd1234@localhost:5432/verigov_db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:abcd1234@localhost:5432/verigov_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['UPLOAD_FOLDER'] = 'Data/uploads'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

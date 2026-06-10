@@ -26,7 +26,7 @@ CORS(app, resources={r"/*": {"origins": "*"}})
 # 1. Configuration Core
 app.config['SECRET_KEY'] = 'verigov_secure_cryptographic_jwt_key_2026'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:abcd1234@localhost:5432/verigov_db'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['UPLOAD_FOLDER'] = 'Data/uploads'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -405,4 +405,5 @@ if __name__ == '__main__':
         db.create_all() 
         print("✅ Database synchronization complete!")
         
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)

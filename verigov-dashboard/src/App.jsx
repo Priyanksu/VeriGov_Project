@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const FLASK_API_BASE = "http://127.0.0.1:5000";
+// Automatically shifts between local development and your live Render production backend
+const FLASK_API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+  ? "http://127.0.0.1:5000"
+  : "https://verigov-project.onrender.com"; // 🌟 REPLACE THIS WITH YOUR ACTUAL LIVE RENDER BACKEND URL
 
 export default function App() {
   const [reports, setReports] = useState([]);
@@ -259,19 +262,19 @@ export default function App() {
                 <tbody className="divide-y divide-gray-800/60">
                   {loading ? (
                     <tr>
-                      <td colSpan="6" className="text-center p-12 text-gray-400 font-mono">
+                      <td colSpan="7" className="text-center p-12 text-gray-400 font-mono">
                         <i className="fa-solid fa-circle-notch animate-spin text-techGreen mr-2"></i> Syncing React State with Backend...
                       </td>
                     </tr>
                   ) : error ? (
                     <tr>
-                      <td colSpan="6" className="text-center p-12 text-red-400 font-mono">
+                      <td colSpan="7" className="text-center p-12 text-red-400 font-mono">
                         ⚠️ Link Failure: {error}
                       </td>
                     </tr>
                   ) : filteredReports.length === 0 ? (
                     <tr>
-                      <td colSpan="6" className="text-center p-12 text-gray-500">
+                      <td colSpan="7" className="text-center p-12 text-gray-500">
                         {activeTab === 'resolved'
                           ? 'No resolved incidents recorded inside this node system archive.'
                           : activeTab === 'claimed'
@@ -319,7 +322,7 @@ export default function App() {
                         </td>
                         <td className="p-4">
                           <a
-                            href={`http://googleusercontent.com/maps.google.com/?q=${report.location_gps}`}
+                            href={`http://maps.google.com/?q=${report.location_gps}`}
                             target="_blank"
                             rel="noreferrer"
                             className="text-xs text-techGreen hover:underline font-mono"
@@ -365,7 +368,6 @@ export default function App() {
                               >
                                 Resolve Issue
                               </button>
-                              {/* 🔍 Dynamic Unit ID Tracking Token Assignment Visibility */}
                               <span className="text-[10px] font-mono text-blue-400 font-bold tracking-wider uppercase bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
                                 Assigned: {getAssignedUnitId(report.id)}
                               </span>
@@ -441,7 +443,7 @@ export default function App() {
                 <div className="bg-black/20 p-3 rounded-lg border border-gray-800">
                   <div className="text-[10px] uppercase font-bold tracking-wider text-gray-500">Incident GPS Coordinates</div>
                   <a
-                    href={`http://googleusercontent.com/maps.google.com/?q=${selectedIncident.location_gps}`}
+                    href={`http://maps.google.com/?q=${selectedIncident.location_gps}`}
                     target="_blank"
                     rel="noreferrer"
                     className="text-xs font-mono text-techGreen hover:underline mt-1 block"
@@ -489,7 +491,6 @@ export default function App() {
                 </button>
               ) : selectedIncident.status === 'Under Investigation' ? (
                 <div className="flex items-center space-x-3">
-                  {/* Visual tracking link inside inspection side modal drawer too */}
                   <span className="text-xs font-mono text-blue-400 bg-blue-500/10 px-3 py-2 rounded-lg border border-blue-500/20 font-bold">
                     TRACKING: {getAssignedUnitId(selectedIncident.id)}
                   </span>

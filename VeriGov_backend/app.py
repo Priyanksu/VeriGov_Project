@@ -160,17 +160,17 @@ def auto_verify_text_semantics(user_description, ai_category):
 def register():
     data = request.get_json() or {}
     if not data.get('email') or not data.get('password') or not data.get('name'):
-        return jsonify({"error": "Missing registration criteria targets"}), 400
+        return jsonify({"error": "Missing registration criteria "}), 400
         
     if User.query.filter_by(email=data['email']).first():
-        return jsonify({"error": "This citizen identifier email is already registered."}), 400
+        return jsonify({"error": "This citizen email is already registered."}), 400
         
     hashed_password = generate_password_hash(data['password'], method='pbkdf2:sha256')
     new_citizen = User(citizen_name=data['name'], email=data['email'], password_hash=hashed_password)
     
     db.session.add(new_citizen)
     db.session.commit()
-    return jsonify({"message": "Citizen identity ledger created successfully!"}), 201
+    return jsonify({"message": "Citizen identity created successfully!"}), 201
 
 @app.route('/api/auth/login', methods=['POST'])
 def login():
